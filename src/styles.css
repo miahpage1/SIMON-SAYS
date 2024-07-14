@@ -50,7 +50,7 @@ h1 {
 .start-button:hover {
   color: white;
   font-size: 18px;
-  border-color: greenyellow;
+  border-color: #FE2ABF;
   transform: rotate(5deg);
 }
 
@@ -85,7 +85,7 @@ h1 {
 
 .pad-green {
   border-top-right-radius: 200px;
-  background-color: olivegreen;
+  background-color: #29CA5F;
 }
 
 .pad-green:hover,

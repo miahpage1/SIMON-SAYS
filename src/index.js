@@ -1,23 +1,15 @@
-/**
- * DOM SELECTORS
- */
 const startButton = document.querySelector(".js-start-button");
 const statusSpan = document.querySelector(".js-status");
 const heading = document.querySelector(".js-heading");
 const padContainer = document.querySelector(".js-pad-container");
 
-/**
- * VARIABLES
- */
+
 let computerSequence = [];
 let playerSequence = [];
 let maxRoundCount = 0;
 let roundCount = 0;
 
-/**
- * The `pads` array contains pad objects for each colored pad.
- * Each pad object includes `color`, `selector`, and `sound`.
- */
+
 const pads = [
   {
     color: "red",
@@ -41,12 +33,7 @@ const pads = [
   },
 ];
 
-startButton.addEventListener("click", startButtonHandler);
-padContainer.addEventListener("click", padHandler);
 
-/**
- * EVENT HANDLERS
- */
 
 function startButtonHandler() {
   setLevel(); // Set level of the game
@@ -67,9 +54,6 @@ function padHandler(event) {
   }
 }
 
-/**
- * HELPER FUNCTIONS
- */
 
 function setLevel(level = 1) {
   switch (level) {
@@ -175,3 +159,8 @@ function resetGame(text) {
   playerSequence = [];
   roundCount = 0;
 }
+
+
+
+startButton.addEventListener("click", startButtonHandler);
+padContainer.addEventListener("click", padHandler);

@@ -50,7 +50,7 @@ function padHandler(event) {
   const pad = pads.find((pad) => pad.color === color);
   if (pad) {
     pad.sound.play();
-    checkPress(color);
+    checkPress(color); // Check if the pressed pad matches the expected color in the sequence
   }
 }
 
@@ -92,21 +92,30 @@ function activatePad(color) {
 
   setTimeout(() => {
     pad.selector.classList.remove("activated");
-  }, 500);
+  }, 500); // Light duration in milliseconds
 }
 
 function activatePads(sequence) {
   sequence.forEach((color, index) => {
     setTimeout(() => {
       activatePad(color);
-    }, index * 600);
+    }, index * 600); // Delay each activation by 600 milliseconds
   });
 }
 
 function playComputerTurn() {
-  padContainer.classList.add("unclickable");
+  padContainer.classList.add("unclickable"); // Prevent player from clicking pads during computer's turn
   setText(statusSpan, "The computer's turn...");
   setText(heading, `Round ${roundCount} of ${maxRoundCount}`);
+
+  const randomColor = getRandomItem(["red", "green", "blue", "yellow"]);
+  computerSequence.push(randomColor);
+  activatePads(computerSequence);
+
+  setTimeout(() => {
+    playHumanTurn(); // After showing the sequence, start the player's turn
+  }, computerSequence.length * 600 + 1000); // Time to wait before player's turn starts
+}
 
   const randomColor = getRandomItem(["red", "green", "blue", "yellow"]);
   computerSequence.push(randomColor);
@@ -119,24 +128,26 @@ function playHumanTurn() {
   padContainer.classList.remove("unclickable");
   setText(statusSpan, `Your turn! Repeat the sequence.`);
   setText(heading, `Round ${roundCount} of ${maxRoundCount}`);
-  playerSequence = [];
-}
+  playerSequence = []; // Reset player's sequence
 
 function checkPress(color) {
-  playerSequence.push(color);
+  playerSequence.push(color); // Add pressed color to player's sequence
   const index = playerSequence.length - 1;
   const remainingPresses = computerSequence.length - playerSequence.length;
   setText(statusSpan, `Presses left: ${remainingPresses}`);
 
+  // Check if the pressed color matches the expected color in the sequence
   if (computerSequence[index] !== playerSequence[index]) {
     resetGame("Oops! Wrong sequence. Game over.");
     return;
   }
 
+  // If player has completed the sequence
   if (remainingPresses === 0) {
     checkRound();
   }
 }
+  
 
 function checkRound() {
   if (playerSequence.length === maxRoundCount) {

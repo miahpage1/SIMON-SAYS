@@ -68,7 +68,7 @@ h1 {
 
 .pad-red {
   border-top-left-radius: 200px;
-  background-color: red;
+  background-color: #FE2A2A;
 }
 
 .pad-red:hover,
@@ -102,7 +102,7 @@ h1 {
 
 .pad-yellow {
   border-bottom-right-radius: 200px;
-  background-color: yellow;
+  background-color: #FEF72A;
 }
 
 .pad-yellow:hover,
@@ -119,7 +119,7 @@ h1 {
 
 .pad-blue {
   border-bottom-left-radius: 200px;
-  background-color: blue;
+  background-color: #2A69FE;
 }
 
 .pad-blue:hover,

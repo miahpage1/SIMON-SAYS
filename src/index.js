@@ -103,9 +103,16 @@ function playComputerTurn() {
   setTimeout(() => playHumanTurn(), computerSequence.length * 600 + 1000);
 }
 
+
+
 function playHumanTurn() {
   padContainer.classList.remove("unclickable");
   setText(statusSpan, `Your turn: ${maxRoundCount - playerSequence.length} presses left`);
+
+  // Attach click event listeners to each pad
+  pads.forEach(pad => {
+    pad.selector.addEventListener('click', padHandler);
+  });
 }
 
 function padHandler(event) {
@@ -121,13 +128,26 @@ function checkPress(color) {
   const remainingPresses = computerSequence.length - playerSequence.length;
   setText(statusSpan, `Your turn: ${remainingPresses} presses left`);
 
+  // Check if player's input matches the computer's sequence
   if (computerSequence[index] !== playerSequence[index]) {
     resetGame("Game Over! You made a mistake.");
     return;
   }
 
-  if (remainingPresses === 0) {
-    setTimeout(checkRound, 1000);
+  // If player completes the sequence, check if round is complete
+  if (playerSequence.length === computerSequence.length) {
+    if (roundCount === maxRoundCount) {
+      // Player completed all rounds successfully
+      setTimeout(() => {
+        alert("Congratulations! You have completed all rounds of the game.");
+        resetGame("Game Over");
+      }, 1000);
+    } else {
+      // Move to the next round
+      roundCount++;
+      playerSequence = [];
+      setTimeout(playComputerTurn, 1000);
+    }
   }
 }
 

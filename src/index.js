@@ -73,15 +73,13 @@ function setText(element, text) {
 }
 
 function activatePad(color) {
-  const pad = pads.find(pad => pad.color === color);
-  if (!pad) return;
-  pad.sound.currentTime = 0;
+  let pad = pads.find((pad) => pad.color === color);
+  pad.selector.classList.add("activated");
   pad.sound.play();
-  pad.selector.classList.add('active');
   setTimeout(() => {
-    pad.selector.classList.remove('active');
-  }, 300);
-}
+  pad.selector.classList.remove("activated");
+  }, 500);
+  }
 
 function activatePads(sequence) {
   let delay = 0;
